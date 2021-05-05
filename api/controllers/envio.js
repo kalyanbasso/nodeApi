@@ -2,7 +2,7 @@
 // const pgp 	  = require('pg-promise')({})
 module.exports = app => {
 
-    const estudante = app.data.pessoa;
+    // const estudante = app.data.pessoa;
     // const estudante = require('../data/pessoa.json');
     const controller = {};
 
