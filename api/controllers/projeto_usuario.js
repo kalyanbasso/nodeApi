@@ -19,7 +19,7 @@ module.exports = app => {
         }
         const values = [id_projeto, id_usuarios]
 
-        app.db.none('INSERT INTO projeto_usuario (id_projeto, id_usurio) VALUES($1, $2)', values);
+        app.db.none('INSERT INTO projeto_usuario (id_projeto, id_usuario) VALUES($1, $2)', values);
 
         res.status(200).json(`Projeto inserido para os usuários`);
     }
@@ -57,7 +57,7 @@ module.exports = app => {
     controller.deleteProjectUser = async function(req, res, next){
         const id = parseInt(req.params.id);
 
-        app.db.any('DELETE FROM projeto_usuario WHERE id_usuario = $1', id)
+        app.db.any('DELETE FROM projeto_usuario WHERE id = $1', id)
             .then(data => {
                 res.status(200)
                     .json({
@@ -86,7 +86,7 @@ module.exports = app => {
             res.status(404).json('ID de usuário não encontrado');
             return next()
         }
-        app.db.none('update projeto_usuario set id_projeto = $1, id_usuario = id_usuario where id = $3', [id_projeto, id_usuario, id]);
+        app.db.none('update projeto_usuario set id_projeto = $1, id_usuario = $2 where id = $3', [id_projeto, id_usuario, id]);
 
         res.status(200).json(`Editado com sucesso!`);
     }
