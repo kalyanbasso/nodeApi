@@ -57,7 +57,7 @@ module.exports = app => {
         });
     }
 
-    controller.editGroupo  = function(req, res){
+    controller.editGrupo  = function(req, res){
         const { id_projeto, descricao,  } = req.body
         const id = parseInt(req.params.id); 
 

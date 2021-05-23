@@ -17,7 +17,7 @@ module.exports = app => {
         .delete(
             controller.deleteGrupo
         )
-        // .put(
-        //     controller.editComentario
-        // )
+        .put(
+            controller.editGrupo
+        )
 }
