@@ -2,16 +2,16 @@ module.exports = app => {
     
     const controller = {};
 
-    controller.addTaskStatus = function(req, res){        
+    controller.addTaskType = function(req, res){        
         const { descricao } = req.body
 
-        app.db.none('INSERT INTO tarefa_status (descricao) VALUES($1)', descricao);
+        app.db.none('INSERT INTO tarefa_tipo (descricao) VALUES($1)', descricao);
 
         res.status(200).json(`Tarefa inserida`);
     }
 
-    controller.getAllTaskStatus = function(req, res, next){
-        app.db.any('select * from tarefa_status')
+    controller.getAllTaskType = function(req, res, next){
+        app.db.any('select * from tarefa_tipo')
             .then(data => {
                 res.status(200)
                     .json({
@@ -25,9 +25,9 @@ module.exports = app => {
         });
     }
 
-    controller.getTaskStatusById = function(req, res, next){
+    controller.getTaskTypeById = function(req, res, next){
         const id = parseInt(req.params.id);
-        app.db.any('SELECT * FROM tarefa_status WHERE id = $1', id)
+        app.db.any('SELECT * FROM tarefa_tipo WHERE id = $1', id)
             .then(data => {
                 res.status(200)
                     .json({
@@ -40,10 +40,10 @@ module.exports = app => {
         });
     }
 
-    controller.deleteTaskStatus = async function(req, res, next){
+    controller.deleteTaskType = async function(req, res, next){
         const id = parseInt(req.params.id);
 
-        app.db.any('DELETE FROM tarefa_status WHERE id = $1', id)
+        app.db.any('DELETE FROM tarefa_tipo WHERE id = $1', id)
             .then(data => {
                 res.status(200)
                     .json({
@@ -56,12 +56,12 @@ module.exports = app => {
         });
     }
 
-    controller.editTaskStatus  = function(req, res){
+    controller.editTaskType  = function(req, res){
         const { descricao } = req.body
 
         const id = parseInt(req.params.id); 
 
-        app.db.none('update tarefa_status set descricao = $1 where id = $2', [descricao, id]);
+        app.db.none('update tarefa_tipo set descricao = $1 where id = $2', [descricao, id]);
 
         res.status(200).json(`Editado com sucesso!`);
     }
