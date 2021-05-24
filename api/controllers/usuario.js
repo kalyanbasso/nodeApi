@@ -49,7 +49,7 @@ module.exports = app => {
                 res.status(200)
                     .json({
                         status: 'success',
-                        message: 'Usuario Deletada'
+                        message: 'Usuario Deletado'
                     });
             })
         .catch(function (err){

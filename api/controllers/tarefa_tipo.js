@@ -17,7 +17,7 @@ module.exports = app => {
                     .json({
                         status: 'success',
                         data: data,
-                        message: 'Todos as usuarios'
+                        message: 'Todos os tipos de tarefas'
                     });
             })
         .catch(function (err){
@@ -48,7 +48,7 @@ module.exports = app => {
                 res.status(200)
                     .json({
                         status: 'success',
-                        message: 'Grupo deletado'
+                        message: 'Tipo tarefa deletado'
                     });
             })
         .catch(function (err){

@@ -8,7 +8,7 @@ module.exports = app => {
         const values = [id_projeto, descricao]
         app.db.none('INSERT INTO grupo (id_projeto, descricao) VALUES($1, $2)', values);
 
-        res.status(200).json(`Comentario inserido`);
+        res.status(200).json(`Grupo inserido`);
     }
 
     controller.getAllGrupo = function(req, res, next){
@@ -18,7 +18,7 @@ module.exports = app => {
                     .json({
                         status: 'success',
                         data: data,
-                        message: 'Todos as usuarios'
+                        message: 'Todos os grupos'
                     });
             })
         .catch(function (err){

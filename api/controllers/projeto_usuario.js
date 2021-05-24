@@ -41,12 +41,12 @@ module.exports = app => {
 
     controller.getProjectById = function(req, res, next){
         const id = parseInt(req.params.id);
-        app.db.any('SELECT * FROM projeto_usuario WHERE id = $1', id)
+        app.db.any('SELECT * FROM projeto_usuario WHERE id_projeto = $1', id)
             .then(data => {
                 res.status(200)
                     .json({
                         status: 'success',
-                        data: data                        
+                        data: data
                     });
             })
         .catch(function (err){
@@ -62,7 +62,7 @@ module.exports = app => {
                 res.status(200)
                     .json({
                         status: 'success',
-                        message: 'Grupo de projetos deletado'
+                        message: 'Projeto e usuario desvinculados'
                     });
             })
         .catch(function (err){

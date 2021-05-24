@@ -7,7 +7,7 @@ module.exports = app => {
 
         app.db.none('INSERT INTO tarefa_status (descricao) VALUES($1)', descricao);
 
-        res.status(200).json(`Tarefa inserida`);
+        res.status(200).json(`Tarefa status inserida`);
     }
 
     controller.getAllTaskStatus = function(req, res, next){
@@ -17,7 +17,7 @@ module.exports = app => {
                     .json({
                         status: 'success',
                         data: data,
-                        message: 'Todos as usuarios'
+                        message: 'Todos os status'
                     });
             })
         .catch(function (err){
@@ -48,7 +48,7 @@ module.exports = app => {
                 res.status(200)
                     .json({
                         status: 'success',
-                        message: 'Grupo deletado'
+                        message: 'Tarefa status deletada'
                     });
             })
         .catch(function (err){
