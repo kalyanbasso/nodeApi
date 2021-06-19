@@ -1,7 +1,13 @@
+const cors = require('cors')
 const app = require('./config/express')();
 const port = app.get('port')
 require('dotenv/config')
-const cors = require('cors')
+
+
+app.use((req, res, next) => {
+    app.use(cors())
+    next();
+})
 
 app.listen(port, () => {
     console.log(`Server port ${port}`);
