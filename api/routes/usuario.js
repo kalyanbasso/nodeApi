@@ -1,3 +1,5 @@
+const { verifyJWT } = require("../helper/security");
+
 module.exports = app => {
 
     const controller = app.controllers.usuario;
@@ -7,6 +9,7 @@ module.exports = app => {
             controller.addUsuario            
         )
         .get(
+            verifyJWT,
             controller.getAllUsuario
         );
     
