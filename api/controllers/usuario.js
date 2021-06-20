@@ -3,7 +3,7 @@ module.exports = app => {
     const controller = {};
 
     controller.addUsuario = function(req, res){        
-        const nome = req.body.nome
+        const nome = req.body.username
 
         app.db.none('INSERT INTO usuario (nome) VALUES ($1)', nome);
 
