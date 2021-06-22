@@ -31,7 +31,7 @@ module.exports = app => {
     }
 
     controller.getAllProjeto = function(req, res, next){
-        app.db.any('SELECT * FROM projeto')
+        app.db.any('SELECT projeto.id, titulo, descricao, u.nome as criador, s.nome as sistema, s.id_sistema, id_criador FROM projeto Join sistema s on projeto.id_sistema = s.id_sistema join usuario u on projeto.id_criador = u.id_usuario')
             .then(data => {
                 res.status(200)
                     .json({
