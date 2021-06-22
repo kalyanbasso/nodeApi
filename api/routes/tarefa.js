@@ -1,3 +1,5 @@
+const { verifyJWT } = require("../helper/security");
+
 module.exports = app => {
 
     const controller = app.controllers.tarefa;
@@ -7,6 +9,7 @@ module.exports = app => {
             controller.getAllTask            
         ) 
         .post(
+            verifyJWT,
             controller.addTask
         )
     

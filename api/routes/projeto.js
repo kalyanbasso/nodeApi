@@ -1,9 +1,12 @@
+const { verifyJWT } = require("../helper/security");
+
 module.exports = app => {
 
     const controller = app.controllers.projeto;
 
     app.route('/projeto')
         .post(            
+            verifyJWT,
             controller.addProjeto            
         )
         .get(
@@ -15,6 +18,7 @@ module.exports = app => {
             controller.getProjetoById
         )
         .put(
+            verifyJWT,
             controller.editProjeto
         )
         .delete(

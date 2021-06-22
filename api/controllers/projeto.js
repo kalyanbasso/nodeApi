@@ -2,10 +2,10 @@ module.exports = app => {
     
     const controller = {};
 
-    controller.addProjeto = async function(req, res, next){        
+    controller.addProjeto = async function(req, res, next){
         const titulo = req.body.titulo
         const descricao = req.body.descricao
-        const id_criador = req.body.id_criador
+        const id_criador = req.userId
         const id_sistema = req.body.id_sistema
         const data_inicio = req.body.data_inicio
         const data_fim = req.body.data_fim
@@ -48,7 +48,7 @@ module.exports = app => {
     controller.getProjetoById = function(req, res, next){
         const id = parseInt(req.params.id);
 
-        app.db.any('SELECT * FROM projeto WHERE id = $1', id)
+        app.db.any("select *, TO_CHAR( data_inicio, 'YYYY-MM-DD' ) dt_ini, TO_CHAR( data_fim, 'YYYY-MM-DD' ) dt_fim from projeto  WHERE id = $1", id)
             .then(data => {
                 res.status(200)
                     .json({
@@ -80,7 +80,6 @@ module.exports = app => {
     controller.editProjeto  = async function(req, res, next){
         const titulo = req.body.titulo
         const descricao = req.body.descricao
-        const id_criador = req.body.id_criador
         const id_sistema = req.body.id_sistema
         const data_inicio = req.body.data_inicio
         const data_fim = req.body.data_fim
@@ -97,11 +96,11 @@ module.exports = app => {
 
         const values = [
             titulo, descricao, data_inicio,
-            data_fim, id_criador, id_sistema, id
+            data_fim, id_sistema, id
         ]
 
         app.db.none('UPDATE projeto SET titulo = $1, descricao = $2, data_inicio = $3, ' +
-            ' data_fim = $4, id_criador = $5, id_sistema = $6, updated_at = now() WHERE id = $7', values);
+            ' data_fim = $4, id_sistema = $5, updated_at = now() WHERE id = $6', values);
 
         res.status(200).json(`Projeto ${titulo} editado com sucesso!`);
     }

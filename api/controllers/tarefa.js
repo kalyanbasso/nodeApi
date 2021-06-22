@@ -3,11 +3,11 @@ module.exports = app => {
     const controller = {};
 
     controller.addTask = function(req, res){        
-        const { titulo, descricao, id_projeto, id_criador, id_dev, tempo_estimado, data_inicio, 
+        const { titulo, descricao, id_projeto, id_dev, tempo_estimado, data_inicio, 
             data_fim, id_pai_tarefa, id_tipo_tarefa, id_status_tarefa, data_inicio_dev, data_fim_dev, 
             created_at, updated_at, tempo_realizado, authorized, id_prioridade, complexidade, impacto, id_grupo 
         } = req.body
-
+        const id_criador = req.userId
         const values = [
             titulo, descricao, id_projeto, id_criador, id_dev, tempo_estimado, data_inicio, 
             data_fim, id_pai_tarefa, id_tipo_tarefa, id_status_tarefa, data_inicio_dev, data_fim_dev, 
