@@ -12,7 +12,7 @@ module.exports = app => {
     }
 
     controller.getAllComentario = function(req, res, next){
-        app.db.any('SELECT c.id, t.titulo, c.descricao, comentario.descricao descricao_pai FROM comentario c join tarefa t on t.id = c.id_tarefa  join comentario on c.id_pai_comentario = comentario.id')
+        app.db.any('SELECT c.id, t.titulo, c.descricao, comentario.descricao descricao_pai FROM comentario c left join tarefa t on t.id = c.id_tarefa  left join comentario on c.id_pai_comentario = comentario.id')
             .then(data => {
                 res.status(200)
                     .json({

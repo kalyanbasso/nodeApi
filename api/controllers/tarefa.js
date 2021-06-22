@@ -25,8 +25,8 @@ module.exports = app => {
         app.db.any('select tarefa.id, tarefa.titulo, tarefa.descricao, p.titulo projeto, usuario.nome usuario, id_dev, tempo_estimado, tempo_realizado, complexidade, ' +
         "TO_CHAR( tarefa.data_inicio, 'DD/MM/YYYY HH24:MI' ) data_inicio, TO_CHAR( tarefa.data_fim, 'DD/MM/YYYY HH24:MI' ) data_fim, " +
                'p2.descricao prioridade ' +
-        'from tarefa join projeto p on tarefa.id_projeto = p.id join usuario on usuario.id_usuario = tarefa.id_criador ' +
-        'join prioridade p2 on tarefa.id_prioridade = p2.id')
+        'from tarefa left join projeto p on tarefa.id_projeto = p.id left join usuario on usuario.id_usuario = tarefa.id_criador ' +
+        ' left join prioridade p2 on tarefa.id_prioridade = p2.id')
             .then(data => {
                 res.status(200)
                     .json({

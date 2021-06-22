@@ -12,7 +12,7 @@ module.exports = app => {
     }
 
     controller.getAllGrupo = function(req, res, next){
-        app.db.any('select grupo.id, p.descricao as projeto, grupo.descricao  from grupo join projeto p on grupo.id_projeto = p.id')
+        app.db.any('select grupo.id, p.descricao as projeto, grupo.descricao  from grupo left join projeto p on grupo.id_projeto = p.id')
             .then(data => {
                 res.status(200)
                     .json({
