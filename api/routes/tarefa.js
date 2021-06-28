@@ -21,6 +21,7 @@ module.exports = app => {
             controller.deleteTask
         )
         .put(
+            verifyJWT,
             controller.editTask
         )
 }

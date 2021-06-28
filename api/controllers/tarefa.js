@@ -42,7 +42,7 @@ module.exports = app => {
 
     controller.getTaskById = function(req, res, next){
         const id = parseInt(req.params.id);
-        app.db.any('SELECT * FROM tarefa WHERE id = $1', id)
+        app.db.any("SELECT *, TO_CHAR( data_inicio, 'YYYY-MM-DD' ) dt_ini, TO_CHAR( data_fim, 'YYYY-MM-DD' ) dt_fim FROM tarefa WHERE id = $1", id)
             .then(data => {
                 res.status(200)
                     .json({
@@ -72,11 +72,11 @@ module.exports = app => {
     }
 
     controller.editTask  = function(req, res){
-        const { titulo, descricao, id_projeto, id_criador, id_dev, tempo_estimado, data_inicio, 
+        const { titulo, descricao, id_projeto, id_dev, tempo_estimado, data_inicio, 
             data_fim, id_pai_tarefa, id_tipo_tarefa, id_status_tarefa, data_inicio_dev, data_fim_dev, 
             created_at, updated_at, tempo_realizado, authorized, id_prioridade, complexidade, impacto, id_grupo 
         } = req.body
-
+        const id_criador = req.userId
         const id = parseInt(req.params.id); 
 
         app.db.none('update tarefa set titulo = $1, descricao = $2, id_projeto = $3, id_criador = $4, id_dev = $5, tempo_estimado = $6, data_inicio= $7, '+
