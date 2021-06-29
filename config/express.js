@@ -1,9 +1,17 @@
 const express = require('express');
+var cors = require('cors');
 const config = require('config');
 const consign = require('consign');
 const pgp = require('pg-promise')({})
 module.exports = () => {
     const app = express();
+    app.use(cors())
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        app.use(cors());
+        next();
+    })
     cn = {
         'host': 'devweb.chiqahlpkytu.sa-east-1.rds.amazonaws.com',
         'port': 5432,
